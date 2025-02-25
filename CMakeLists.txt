@@ -31,7 +31,7 @@ include(pico_sdk_import.cmake)
 include(pico_extras_import_optional.cmake)
 
 # set the project name
-project(pico_dm_qd3503728_hagl_gfx C CXX ASM)
+project(pico_dm_qd3503728_hagl_effects C CXX ASM)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
@@ -184,7 +184,10 @@ file(GLOB_RECURSE COMMON_SOURCES
     ft6236.c
     i2c_tools.c
     backlight.c
-    xoroshiro64star.c
+    deform.c
+    metaballs.c
+    plasma.c
+    rotozoom.c
 )
 
 # rest of your project
@@ -218,22 +221,29 @@ target_compile_definitions(${PROJECT_NAME} PUBLIC MY_DISP_BUF_SIZE=${MY_DISP_BUF
 # marcos of HAGL
 if(${PICO_BOARD} STREQUAL "pico" OR ${PICO_PLATFORM} STREQUAL "rp2040")
     target_compile_definitions(${PROJECT_NAME} PRIVATE
-        # NOTE: rp2040 only support single buffer
-        # otherwise, it will out of memory.
-        HAGL_HAL_USE_SINGLE_BUFFER
+        # HAGL_HAL_USE_SINGLE_BUFFER
+
+        # FIXME: text is blinking
+        HAGL_HAL_USE_DOUBLE_BUFFER
         HAGL_HAL_DEBUG
+
+        MIPI_DISPLAY_WIDTH=240
+        MIPI_DISPLAY_HEIGHT=160
+        MIPI_DISPLAY_OFFSET_X=120
+        MIPI_DISPLAY_OFFSET_Y=80
     )
 elseif(${PICO_BOARD} STREQUAL "pico2" OR ${PICO_PLATFORM} STREQUAL "rp2350")
     target_compile_definitions(${PROJECT_NAME} PRIVATE
         # HAGL_HAL_USE_SINGLE_BUFFER
 
-        # FIXME:
-        # the buffer of `mipi_display_write_xywh` should swap bit order for each 16 bits
+        # FIXME: text is blinking
         HAGL_HAL_USE_DOUBLE_BUFFER
-
-        # NOTE: Don't use HAGL_HAL_USE_TRIPLE_BUFFER
-        # because it will cause rp2350 out of memory.
         HAGL_HAL_DEBUG
+
+        MIPI_DISPLAY_WIDTH=320
+        MIPI_DISPLAY_HEIGHT=240
+        MIPI_DISPLAY_OFFSET_X=80
+        MIPI_DISPLAY_OFFSET_Y=40
     )
 endif()
 

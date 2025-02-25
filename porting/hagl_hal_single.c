@@ -54,6 +54,8 @@ valid.
 #define printf(fmt, ...)
 
 extern size_t mipi_display_write_xy(uint16_t x1, uint16_t y1, uint8_t *buffer);
+extern size_t mipi_display_fill_xywh(uint16_t x1, uint16_t y1, uint16_t w, uint16_t h, void *_color);
+extern size_t mipi_display_write_xywh(uint16_t x1, uint16_t y1, uint16_t w, uint16_t h, uint8_t *buffer);
 
 static void
 put_pixel(void *self, int16_t x0, int16_t y0, hagl_color_t color)

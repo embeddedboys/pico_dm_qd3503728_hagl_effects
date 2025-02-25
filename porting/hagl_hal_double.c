@@ -62,6 +62,8 @@ assumed to be valid.
 static hagl_bitmap_t bb;
 static uint8_t g_hagl_disp_buffer[HAGL_DISP_BUFFER_SIZE] = {0};
 
+extern size_t mipi_display_write_xywh(uint16_t x1, uint16_t y1, uint16_t w, uint16_t h, uint8_t *buffer);
+
 static size_t
 flush(void *self)
 {

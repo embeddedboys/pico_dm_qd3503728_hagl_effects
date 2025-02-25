@@ -83,6 +83,9 @@ mipi_display_fill_xywh(uint16_t x1, uint16_t y1, uint16_t w, uint16_t h, void *_
         return 0;
     }
 
+    x1 = x1 + MIPI_DISPLAY_OFFSET_X;
+    y1 = y1 + MIPI_DISPLAY_OFFSET_Y;
+
     int32_t x2 = x1 + w - 1;
     int32_t y2 = y1 + h - 1;
     size_t size = w * h;
@@ -100,9 +103,16 @@ mipi_display_write_xywh(uint16_t x1, uint16_t y1, uint16_t w, uint16_t h, uint8_
         return 0;
     }
 
+    x1 = x1 + MIPI_DISPLAY_OFFSET_X;
+    y1 = y1 + MIPI_DISPLAY_OFFSET_Y;
+
     int32_t x2 = x1 + w - 1;
     int32_t y2 = y1 + h - 1;
     uint32_t size = w * h;
+    uint16_t *color = (uint16_t *)buffer;
+
+    for (size_t i = 0; i < size; i++)
+        color[i] = htons(color[i]);
 
     ili9488_video_flush(x1, y1, x2, y2, (void *)buffer, size);
 
@@ -113,6 +123,9 @@ size_t
 mipi_display_write_xy(uint16_t x1, uint16_t y1, uint8_t *buffer)
 {
     uint16_t color = htons(*(uint16_t *)buffer);
+
+    x1 = x1 + MIPI_DISPLAY_OFFSET_X;
+    y1 = y1 + MIPI_DISPLAY_OFFSET_Y;
 
     ili9488_video_flush(x1, y1, x1, y1, &color, 1);
 

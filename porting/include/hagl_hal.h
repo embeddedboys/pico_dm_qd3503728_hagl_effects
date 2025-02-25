@@ -86,19 +86,19 @@ extern "C" {
 #endif
 
 #ifndef MIPI_DISPLAY_WIDTH
-#define MIPI_DISPLAY_WIDTH          (480)
+#define MIPI_DISPLAY_WIDTH          (320)
 #endif
 #ifndef MIPI_DISPLAY_HEIGHT
-#define MIPI_DISPLAY_HEIGHT         (320)
+#define MIPI_DISPLAY_HEIGHT         (240)
 #endif
 #ifndef MIPI_DISPLAY_DEPTH
 #define MIPI_DISPLAY_DEPTH          (16)
 #endif
 #ifndef MIPI_DISPLAY_OFFSET_X
-#define MIPI_DISPLAY_OFFSET_X       (0)
+#define MIPI_DISPLAY_OFFSET_X       (80)
 #endif
 #ifndef MIPI_DISPLAY_OFFSET_Y
-#define MIPI_DISPLAY_OFFSET_Y       (0)
+#define MIPI_DISPLAY_OFFSET_Y       (40)
 #endif
 
 #ifndef HAGL_HAL_PIXEL_SIZE
