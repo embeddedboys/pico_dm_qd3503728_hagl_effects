@@ -2,6 +2,9 @@
 
 HAGL old school demo effects for Pico DM QD3503728
 
+![demo0](./assets/IMG_0618_compressed.png)</br>
+![demo1](./assets/IMG_0619_compressed.png)
+
 ## Requirements
 
 - pico-sdk >= 2.1.1
